@@ -1,29 +1,18 @@
-import './App.css'
-import Navbar from './components/navbar'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './components/navbar';
+import HomePage from './components/main/HomePage';
+import BookEdit from './components/main/BookEdit';
 
 function App() {
-  const fetchData = async () => {
-    try {
-      const response = await fetch('/api/rest'); // Angenommen, dein Endpunkt ist /api/data
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      const data = await response.json();
-      console.log(data); // Daten in der Konsole anzeigen
-    } catch (error) {
-      console.error('Es gab ein Problem mit der Fetch-Operation:', error);
-    }
-  };
-
   return (
-    <>
+    <Router>
       <Navbar />
-        <button onClick={fetchData}>
-          Daten laden
-        </button>
-    </>
-  )
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/edit/:id" element={<BookEdit />} />
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
-
+export default App;
