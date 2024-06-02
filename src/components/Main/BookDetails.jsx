@@ -61,7 +61,6 @@ const BookDetails = () => {
       });
   };
 
-  // Buch wird gerade geladen, oder konnte nicht gefunden werden
   if (!book) {
     if (notFound) {
       return <div>Book not found</div>;
