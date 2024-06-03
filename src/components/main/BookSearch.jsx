@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import SearchForm from '../form/BookSearchForm.jsx';
@@ -114,33 +114,6 @@ const BookSearch = () => {
     navigate(`/details/${params.row.id}`);
   };
 
-  const handleDeleteRow = async (id, cToken) => {
-    try {
-      if (!cToken) {
-        throw new Error('No token available');
-      }
-
-      const headers = {
-        Authorization: `Bearer ${cToken}`,
-        'Content-Type': 'application/json',
-      };
-
-      const response = await fetch(`/api/rest/${id}`, {
-        method: 'DELETE',
-        headers: headers,
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to delete book');
-      }
-
-      const updatedRows = buchDataWithUniqueId.filter((row) => row.id !== id);
-      setBuchData(updatedRows);
-    } catch (error) {
-      console.error('Error deleting book:', error);
-    }
-  };
-
   const handleReset = () => {
     setSearchIsbn('');
     setSearchTitel('');
@@ -170,7 +143,6 @@ const BookSearch = () => {
         searchError={searchError}
         showTable={showTable}
         navigateToDetails={navigateToDetails}
-        handleDeleteRow={handleDeleteRow}
         buchDataWithUniqueId={buchDataWithUniqueId}
         handleReset={handleReset}
       />

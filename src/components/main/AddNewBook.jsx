@@ -1,11 +1,9 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 
-import { AuthContext } from '../provider/AuthProvider.jsx';
 import AddNewBookForm from '../form/AddNewBookForm.jsx';
 
 const AddNewBook = () => {
-  const { cToken } = useContext(AuthContext);
   const url = '/api/rest';
   const [feedbackMessage, setFeedbackMessage] = useState('');
   const [book, setBook] = useState({
@@ -24,12 +22,7 @@ const AddNewBook = () => {
   const handleAddNewBook = async (bookDTO) => {
     console.log('handleAddNewBook called', bookDTO);
 
-    if (!cToken) {
-      throw new Error('No token available');
-    }
-
     const headers = {
-      Authorization: `Bearer ${cToken}`,
       'Content-Type': 'application/json',
     };
 

@@ -8,12 +8,11 @@ import {
   Rating,
   TextField,
 } from '@mui/material';
-import { useContext, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
-import { AuthContext } from '../provider/AuthProvider.jsx';
 import {
   validateISBN,
   validatePreis,
@@ -22,8 +21,7 @@ import {
   validateDatum,
 } from './inputValidator.js';
 
-const BookChangeForm = ({ book, etag }) => {
-  const { cToken } = useContext(AuthContext);
+const BookEditForm = ({ book, etag }) => {
   const [editedBook, setEditedBook] = useState(book);
   const [formValid, setFormValid] = useState(true);
   const [isbnValidation, setIsbnValidation] = useState({
@@ -143,12 +141,8 @@ const BookChangeForm = ({ book, etag }) => {
     try {
       const url = '/api/rest';
       const request = `/${id}`;
-      if (!cToken) {
-        throw new Error('No token available');
-      }
-
+      
       const headers = {
-        Authorization: `Bearer ${cToken}`,
         'Content-Type': 'application/json',
         'If-Match': etag,
       };
@@ -325,7 +319,7 @@ const BookChangeForm = ({ book, etag }) => {
   );
 };
 
-BookChangeForm.propTypes = {
+BookEditForm.propTypes = {
   book: PropTypes.shape({
     titel: PropTypes.string,
     isbn: PropTypes.string,
@@ -341,4 +335,4 @@ BookChangeForm.propTypes = {
   etag: PropTypes.string.isRequired,
 };
 
-export default BookChangeForm;
+export default BookEditForm;

@@ -17,7 +17,7 @@ import {
   Checkbox,
   Rating,
 } from '@mui/material';
-import StarIcon from '@mui/icons-material/Star'
+import StarIcon from '@mui/icons-material/Star';
 import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 
@@ -127,10 +127,9 @@ const AddNewBookForm = ({ book, handleAddNewBook, feedbackMessage }) => {
         isValid: isValidRabatt,
         errorMessage: isValidRabatt
           ? ''
-          : 
-          <>
-          Muss ein gültiger Rabatt sein <br/>(z.B. 0.10),
-          </>
+          : <>
+              Muss ein gültiger Rabatt sein <br/>(z.B. 0.10),
+            </>,
       });
     }
 
@@ -173,200 +172,200 @@ const AddNewBookForm = ({ book, handleAddNewBook, feedbackMessage }) => {
         spacing={2}
         style={{ flexDirection: 'column', alignItems: 'center' }}
       >
-<Paper>
-  <TableContainer>
-    <Table>
-      <TableBody>
-        <TableRow>
-          <TableCell>Titel:</TableCell>
-          <TableCell>
-            <Grid item xs={12}>
-              <TextField
-                required
-                type="text"
-                name="titel"
-                value={addBook.titel || ''}
-                onChange={handleInputChange}
-                label="Required"
-                error={!titleValidation.isValid}
-                helperText={titleValidation.errorMessage}
-              />
-            </Grid>
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>Preis:</TableCell>
-          <TableCell>
-            <Grid item xs={12}>
-              <TextField
-                required
-                type="text"
-                name="preis"
-                value={addBook.preis || ''}
-                onChange={handleInputChange}
-                label="Required"
-                error={!preisValidation.isValid}
-                helperText={preisValidation.errorMessage}
-              />
-            </Grid>
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>Rabatt:</TableCell>
-          <TableCell>
-            <Grid item xs={12}>
-              <TextField
-                type="text"
-                name="rabatt"
-                value={addBook.rabatt || ''}
-                onChange={handleInputChange}
-                error={!rabattValidation.isValid}
-                helperText={rabattValidation.errorMessage}
-              />
-            </Grid>
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>Rating:</TableCell>
-          <TableCell>
-            <Grid item xs={12}>
-              <Rating
-                required
-                type="rating"
-                name="rating"
-                value={addBook.rating || 0}
-                label="Required"
-                onChange={(event, newValue) =>
-                  handleRatingChange(newValue)
-                }
-                icon={<StarIcon />}
-              />
-            </Grid>
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>Art:</TableCell>
-          <TableCell>
-            <Grid item xs={12}>
-              <FormControl>
-                <Select
-                  labelId="art-label"
-                  name="art"
-                  value={addBook.art || ''}
-                  onChange={(e) =>
-                    setAddBook({
-                      ...addBook,
-                      art: e.target.value,
-                    })
-                  }
-                >
-                  <MenuItem
-                    name="kindle"
-                    value="KINDLE"
-                    onChange={handleInputChange}
-                  >
-                    Kindle
-                  </MenuItem>
-                  <MenuItem
-                    name="druckausgabe"
-                    value="DRUCKAUSGABE"
-                    onChange={handleInputChange}
-                  >
-                    Druckausgabe
-                  </MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>Lieferbar:</TableCell>
-          <TableCell>
-            <Grid item xs={12}>
-              <FormControl>
-                <RadioGroup
-                  name="lieferbar"
-                  value={addBook.lieferbar || true}
-                  onChange={handleInputChange}
-                >
-                  <FormControlLabel
-                    value="true"
-                    control={<Radio />}
-                    label="Ja"
-                  />
-                  <FormControlLabel
-                    value="false"
-                    control={<Radio />}
-                    label="Nein"
-                  />
-                </RadioGroup>
-              </FormControl>
-            </Grid>
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>Datum:</TableCell>
-          <TableCell>
-            <Grid item xs={12}>
-              <TextField
-                type="date"
-                name="datum"
-                value={addBook.datum || ''}
-                onChange={handleDateChange}
-              />
-            </Grid>
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>Homepage:</TableCell>
-          <TableCell>
-            <Grid item xs={12}>
-              <TextField
-                type="text"
-                name="homepage"
-                value={addBook.homepage || ''}
-                onChange={handleInputChange}
-                error={!homepageValidation.isValid}
-                helperText={homepageValidation.errorMessage}
-              />
-            </Grid>
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>Schlagwörter:</TableCell>
-          <TableCell>
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={addBook.schlagwoerter}
-                    value={['TYPESCRIPT']}
-                    onChange={handleInputChange}
-                    name="typescript"
-                    color="primary"
-                  />
-                }
-                label="TypeScript"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={addBook.schlagwoerter}
-                    value={['JAVASCRIPT']}
-                    onChange={handleInputChange}
-                    name="javascript"
-                    color="primary"
-                  />
-                }
-                label="JavaScript"
-              />
-            </Grid>
-          </TableCell>
-        </TableRow>
-      </TableBody>
-    </Table>
-  </TableContainer>
-</Paper>
+        <Paper>
+          <TableContainer>
+            <Table>
+              <TableBody>
+                <TableRow>
+                  <TableCell>Titel:</TableCell>
+                  <TableCell>
+                    <Grid item xs={12}>
+                      <TextField
+                        required
+                        type="text"
+                        name="titel"
+                        value={addBook.titel || ''}
+                        onChange={handleInputChange}
+                        label="Required"
+                        error={!titleValidation.isValid}
+                        helperText={titleValidation.errorMessage}
+                      />
+                    </Grid>
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Preis:</TableCell>
+                  <TableCell>
+                    <Grid item xs={12}>
+                      <TextField
+                        required
+                        type="text"
+                        name="preis"
+                        value={addBook.preis || ''}
+                        onChange={handleInputChange}
+                        label="Required"
+                        error={!preisValidation.isValid}
+                        helperText={preisValidation.errorMessage}
+                      />
+                    </Grid>
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Rabatt:</TableCell>
+                  <TableCell>
+                    <Grid item xs={12}>
+                      <TextField
+                        type="text"
+                        name="rabatt"
+                        value={addBook.rabatt || ''}
+                        onChange={handleInputChange}
+                        error={!rabattValidation.isValid}
+                        helperText={rabattValidation.errorMessage}
+                      />
+                    </Grid>
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Rating:</TableCell>
+                  <TableCell>
+                    <Grid item xs={12}>
+                      <Rating
+                        required
+                        type="rating"
+                        name="rating"
+                        value={addBook.rating || 0}
+                        label="Required"
+                        onChange={(event, newValue) =>
+                          handleRatingChange(newValue)
+                        }
+                        icon={<StarIcon />}
+                      />
+                    </Grid>
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Art:</TableCell>
+                  <TableCell>
+                    <Grid item xs={12}>
+                      <FormControl>
+                        <Select
+                          labelId="art-label"
+                          name="art"
+                          value={addBook.art || ''}
+                          onChange={(e) =>
+                            setAddBook({
+                              ...addBook,
+                              art: e.target.value,
+                            })
+                          }
+                        >
+                          <MenuItem
+                            name="kindle"
+                            value="KINDLE"
+                            onChange={handleInputChange}
+                          >
+                            Kindle
+                          </MenuItem>
+                          <MenuItem
+                            name="druckausgabe"
+                            value="DRUCKAUSGABE"
+                            onChange={handleInputChange}
+                          >
+                            Druckausgabe
+                          </MenuItem>
+                        </Select>
+                      </FormControl>
+                    </Grid>
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Lieferbar:</TableCell>
+                  <TableCell>
+                    <Grid item xs={12}>
+                      <FormControl>
+                        <RadioGroup
+                          name="lieferbar"
+                          value={addBook.lieferbar || true}
+                          onChange={handleInputChange}
+                        >
+                          <FormControlLabel
+                            value="true"
+                            control={<Radio />}
+                            label="Ja"
+                          />
+                          <FormControlLabel
+                            value="false"
+                            control={<Radio />}
+                            label="Nein"
+                          />
+                        </RadioGroup>
+                      </FormControl>
+                    </Grid>
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Datum:</TableCell>
+                  <TableCell>
+                    <Grid item xs={12}>
+                      <TextField
+                        type="date"
+                        name="datum"
+                        value={addBook.datum || ''}
+                        onChange={handleDateChange}
+                      />
+                    </Grid>
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Homepage:</TableCell>
+                  <TableCell>
+                    <Grid item xs={12}>
+                      <TextField
+                        type="text"
+                        name="homepage"
+                        value={addBook.homepage || ''}
+                        onChange={handleInputChange}
+                        error={!homepageValidation.isValid}
+                        helperText={homepageValidation.errorMessage}
+                      />
+                    </Grid>
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Schlagwörter:</TableCell>
+                  <TableCell>
+                    <Grid item xs={12}>
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            checked={addBook.schlagwoerter}
+                            value={['TYPESCRIPT']}
+                            onChange={handleInputChange}
+                            name="typescript"
+                            color="primary"
+                          />
+                        }
+                        label="TypeScript"
+                      />
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            checked={addBook.schlagwoerter}
+                            value={['JAVASCRIPT']}
+                            onChange={handleInputChange}
+                            name="javascript"
+                            color="primary"
+                          />
+                        }
+                        label="JavaScript"
+                      />
+                    </Grid>
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Paper>
         <Grid item xs={12}>
           <Button
             variant="contained"

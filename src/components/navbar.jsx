@@ -1,76 +1,73 @@
-import React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Button from '@mui/material/Button';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import MenuIcon from '@mui/icons-material/Menu';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  IconButton,
+  Menu,
+  MenuItem,
 
-const Navbar = () => {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [username, setUsername] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  Box,
+  Stack
+} from '@mui/material';
+import { AddCircleOutline, Search, AccountCircle } from '@mui/icons-material';
 
-  const handleMenuOpen = (event) => {
+
+
+const Navbar = (props) => {
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [open, setOpen] = useState(false);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleMenuClose = () => {
+  const handleClose = () => {
     setAnchorEl(null);
   };
 
   const handleLogin = () => {
-    // Hier kannst du die Login-Logik hinzufügen
-    console.log('Logging in with', { username, password });
+    //login logic
+    console.log(`Logging in with ${username} and ${password}`);
+    // After successful login, close the dialog
+    setOpen(false);
   };
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="fixed" sx={{ top: 0 }}>
+
+      <AppBar position="sticky" sx={{ boxShadow: 10, borderRadius: '10px' }}>
         <Toolbar>
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            onClick={handleMenuOpen}
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Button color="inherit">Suchen</Button>
-          <Button color="inherit">Erstellen</Button>
-          <TextField
-            variant="outlined"
-            size="small"
-            placeholder="Benutzername"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            sx={{ bgcolor: 'white', borderRadius: 1, mr: 1 }}
-          />
-          <TextField
-            variant="outlined"
-            size="small"
-            type="password"
-            placeholder="Passwort"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            sx={{ bgcolor: 'white', borderRadius: 1, mr: 1 }}
-          />
-          <Button color="inherit" onClick={handleLogin}>Login</Button>
+          <Button component={Link} to="/" color="inherit">
+            <Typography variant="h6">
+              BUCHWEB
+            </Typography>
+          </Button>
+          <Box sx={{ flexGrow: 1 }} />
+          <Stack direction="row" spacing={2}>
+            <Button component={Link} to="/add" color="inherit" startIcon={<AddCircleOutline />}>
+              Erstellen
+            </Button>
+            <Button component={Link} to="/search" color="inherit" startIcon={<Search />}>
+              Suchen
+            </Button>
+            <IconButton color="inherit" onClick={handleMenu}>
+              <AccountCircle />
+            </IconButton>
+          </Stack>
           <Menu
             anchorEl={anchorEl}
             open={Boolean(anchorEl)}
-            onClose={handleMenuClose}
+            onClose={handleClose}
           >
-            <MenuItem onClick={handleMenuClose}>Suchen</MenuItem>
-            <MenuItem onClick={handleMenuClose}>Erstellen</MenuItem>
+            <MenuItem onClick={() => setOpen(true)}>Login</MenuItem>
           </Menu>
         </Toolbar>
       </AppBar>
-    </Box>
+
   );
 };
 

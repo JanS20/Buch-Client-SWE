@@ -1,4 +1,4 @@
-import { useState} from 'react';
+import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Grid, Typography, Rating, Button, Box, Divider, Link, IconButton, useMediaQuery } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
@@ -6,10 +6,9 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import PropTypes from 'prop-types';
 
-//import { formatDate, formatPreis } from './internatUtil';
 import ConfirmDelete from '../dialog/ConfirmDelete.jsx';
 
-const BookDetailsForm = ({ book, deleteBook, writeAccess }) => {
+const BookDetailsForm = ({ book, deleteBook }) => {
   const {
     isbn,
     rating,
@@ -27,27 +26,31 @@ const BookDetailsForm = ({ book, deleteBook, writeAccess }) => {
   const exists = (value) => value !== null && value !== undefined;
   const [deleteConfirmation, setDeleteConfirmation] = useState(false);
   const { id = 'default' } = useParams();
-  //const bookRabattP = Math.round(rabatt * 100);
   const navigate = useNavigate();
-  //const gridSpacer = <Grid item xs={6} />;
   const isMobile = useMediaQuery('(max-width:400px)');
+
   const handleBtenClick = () => {
     navigate(`/edit/${id}`);
   };
+
   const handleDeleteClick = () => {
     setDeleteConfirmation(true);
   };
+
   const handleDeleteConfirm = () => {
     deleteBook(id);
     setDeleteConfirmation(false);
     navigate('/search');
   };
+
   const handleDeleteCancel = () => {
     setDeleteConfirmation(false);
   };
+
   const handleBackClick = () => {
     navigate(-1);
   };
+
   return (
     <Box p={2} bgcolor="background.paper" boxShadow={3} borderRadius={2}>
       <Grid container spacing={4}>
@@ -65,42 +68,34 @@ const BookDetailsForm = ({ book, deleteBook, writeAccess }) => {
             <strong></strong> {formatPreis(preis)}€
           </Typography>
         </Grid>
-        <Grid item xs={2}>
-        </Grid>
+        <Grid item xs={2} />
         <Grid item xs={4}>
           <Typography variant="body1" textAlign="left" >
             <strong>Rabatt:</strong> {exists(rabatt) ? `${rabatt}%` : 'N/A'}
           </Typography>
         </Grid>
-        <Grid item xs={1}>
-        </Grid>
+        <Grid item xs={1} />
         <Grid item xs={3}>
           <Typography variant="body1" textAlign="left">
             <strong>Datum:</strong> {renderNullableValue(new Date(datum).toLocaleDateString())}
           </Typography>
         </Grid>
-        <Grid item xs={8}>
-        </Grid>
-        <Grid item xs={1}>
-        </Grid>
+        <Grid item xs={8} />
+        <Grid item xs={1} />
         <Grid item xs={3}>
           <Typography variant="body1" textAlign="left">
             <strong>ISBN:</strong> {isbn}
           </Typography>
         </Grid>
-        <Grid item xs={8}>
-        </Grid>
-        <Grid item xs={1}>
-        </Grid>
+        <Grid item xs={8} />
+        <Grid item xs={1} />
         <Grid item xs={3}>
           <Typography variant="body1" textAlign="left">
             <strong>Schlagwörter:</strong> {exists(schlagwoerter[0]) ? schlagwoerter.join(', ') : 'N/A'}
           </Typography>
         </Grid>
-        <Grid item xs={8}>
-        </Grid>
-        <Grid item xs={1}>
-        </Grid>
+        <Grid item xs={8} />
+        <Grid item xs={1} />
         <Grid item xs={7}>
           <Typography variant="body1" textAlign="left">
             <strong>Art:</strong> {renderNullableValue(art)}
@@ -139,21 +134,18 @@ const BookDetailsForm = ({ book, deleteBook, writeAccess }) => {
             <IconButton
               color="primary"
               onClick={handleBackClick}
-              disabled={writeAccess}
             >
               <ArrowBackIcon />
             </IconButton>
             <IconButton
               color="primary"
               onClick={handleBtenClick}
-              disabled={writeAccess}
             >
               <EditIcon />
             </IconButton>
             <IconButton
               color="secondary"
               onClick={handleDeleteClick}
-              disabled={writeAccess}
             >
               <DeleteIcon />
             </IconButton>
@@ -165,7 +157,6 @@ const BookDetailsForm = ({ book, deleteBook, writeAccess }) => {
               variant="contained"
               color="primary"
               onClick={handleBackClick}
-              disabled={writeAccess}
               startIcon={<ArrowBackIcon />}
               style={{ marginRight: 8 }}
             >
@@ -175,7 +166,6 @@ const BookDetailsForm = ({ book, deleteBook, writeAccess }) => {
               variant="contained"
               color="primary"
               onClick={handleBtenClick}
-              disabled={writeAccess}
               startIcon={<EditIcon />}
               style={{ marginRight: 8 }}
             >
@@ -185,7 +175,6 @@ const BookDetailsForm = ({ book, deleteBook, writeAccess }) => {
               variant="contained"
               color="secondary"
               onClick={handleDeleteClick}
-              disabled={writeAccess}
               startIcon={<DeleteIcon />}
             >
               Delete
@@ -219,6 +208,6 @@ BookDetailsForm.propTypes = {
     }).isRequired,
   }).isRequired,
   deleteBook: PropTypes.func.isRequired,
-  writeAccess: PropTypes.bool.isRequired,
 };
+
 export default BookDetailsForm;

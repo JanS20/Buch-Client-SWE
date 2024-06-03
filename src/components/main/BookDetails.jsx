@@ -3,13 +3,12 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
 import BookDetailsForm from '../form/BookDetailsForm.jsx';
-//import { useAuth } from '../provider/useAuth.js';
 
 const BookDetails = () => {
   const [book, setBook] = useState(null);
   const { id = 'default' } = useParams();
-  //const { cToken, writeAccess } = useAuth();
   const [notFound, setNotFound] = useState(false);
+
   useEffect(() => {
     const fetchBook = async () => {
       const url = '/api/rest';
@@ -41,7 +40,6 @@ const BookDetails = () => {
 
   const deleteBook = (id) => {
     const headers = {
-      //Authorization: `Bearer ${cToken}`,
       'Content-Type': 'application/hal',
     };
     const url = '/api/rest/';
@@ -67,12 +65,12 @@ const BookDetails = () => {
     }
     return <div>Loading...</div>;
   }
+
   return (
     <div>
       <BookDetailsForm
         book={book}
         deleteBook={deleteBook}
-        //writeAccess={writeAccess}
       />
     </div>
   );
