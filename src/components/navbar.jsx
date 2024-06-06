@@ -38,9 +38,9 @@ const Navbar = (props) => {
     <AppBar position="sticky" sx={{ boxShadow: 10, borderRadius: '10px' }}>
       <Toolbar>
         <Button component={Link} to="/" color="inherit">
-          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
-            <span style={{ color: 'darkorange' }}>BUCH</span>
-            <span style={{ color: 'darkblue' }}>WEB</span>
+          <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
+            <span style={{ color: 'darkorange' }}>Buch</span>
+            <span style={{ color: 'white' }}>Web</span>
           </Typography>
         </Button>
         <Box sx={{ flexGrow: 1 }} />

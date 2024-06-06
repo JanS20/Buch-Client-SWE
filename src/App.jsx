@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import Navbar from './components/navbar'; // Beachte den korrekten Pfad
+import Navbar from './components/Navbar'; // Beachte den korrekten Pfad
 import BookEdit from './components/main/BookEdit'; // Beachte den korrekten Pfad
 import BookSearch from './components/main/BookSearch';
 import AddNewBook from './components/main/AddNewBook'; // Beachte den korrekten Pfad
