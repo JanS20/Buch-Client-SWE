@@ -8,13 +8,10 @@ import {
   IconButton,
   Menu,
   MenuItem,
-
   Box,
   Stack
 } from '@mui/material';
 import { AddCircleOutline, Search, AccountCircle } from '@mui/icons-material';
-
-
 
 const Navbar = (props) => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -31,43 +28,42 @@ const Navbar = (props) => {
   };
 
   const handleLogin = () => {
-    //login logic
+    // login logic
     console.log(`Logging in with ${username} and ${password}`);
     // After successful login, close the dialog
     setOpen(false);
   };
 
   return (
-
-      <AppBar position="sticky" sx={{ boxShadow: 10, borderRadius: '10px' }}>
-        <Toolbar>
-          <Button component={Link} to="/" color="inherit">
-            <Typography variant="h6">
-              BUCHWEB
-            </Typography>
+    <AppBar position="sticky" sx={{ boxShadow: 10, borderRadius: '10px' }}>
+      <Toolbar>
+        <Button component={Link} to="/" color="inherit">
+          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+            <span style={{ color: 'darkorange' }}>BUCH</span>
+            <span style={{ color: 'darkblue' }}>WEB</span>
+          </Typography>
+        </Button>
+        <Box sx={{ flexGrow: 1 }} />
+        <Stack direction="row" spacing={2}>
+          <Button component={Link} to="/add" color="inherit" startIcon={<AddCircleOutline />}>
+            Erstellen
           </Button>
-          <Box sx={{ flexGrow: 1 }} />
-          <Stack direction="row" spacing={2}>
-            <Button component={Link} to="/add" color="inherit" startIcon={<AddCircleOutline />}>
-              Erstellen
-            </Button>
-            <Button component={Link} to="/search" color="inherit" startIcon={<Search />}>
-              Suchen
-            </Button>
-            <IconButton color="inherit" onClick={handleMenu}>
-              <AccountCircle />
-            </IconButton>
-          </Stack>
-          <Menu
-            anchorEl={anchorEl}
-            open={Boolean(anchorEl)}
-            onClose={handleClose}
-          >
-            <MenuItem onClick={() => setOpen(true)}>Login</MenuItem>
-          </Menu>
-        </Toolbar>
-      </AppBar>
-
+          <Button component={Link} to="/search" color="inherit" startIcon={<Search />}>
+            Suchen
+          </Button>
+          <IconButton color="inherit" onClick={handleMenu}>
+            <AccountCircle />
+          </IconButton>
+        </Stack>
+        <Menu
+          anchorEl={anchorEl}
+          open={Boolean(anchorEl)}
+          onClose={handleClose}
+        >
+          <MenuItem onClick={() => setOpen(true)}>Login</MenuItem>
+        </Menu>
+      </Toolbar>
+    </AppBar>
   );
 };
 
