@@ -124,7 +124,7 @@ const BookSearch = () => {
   };
 
   return (
-    <div>
+    <div style={{ marginTop: '10px' }}>
       <SearchForm
         searchIsbn={searchIsbn}
         setSearchIsbn={setSearchIsbn}

@@ -16,6 +16,8 @@ import {
   FormControlLabel,
   Checkbox,
   Rating,
+  Box,
+  Typography,
 } from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
 import PropTypes from 'prop-types';
@@ -166,12 +168,17 @@ const AddNewBookForm = ({ book, handleAddNewBook, feedbackMessage }) => {
   ]);
 
   return (
-    <div>
+    <Box p={2} bgcolor="background.paper" boxShadow={3} borderRadius={2}>
       <Grid
         container
         spacing={2}
         style={{ flexDirection: 'column', alignItems: 'center' }}
-      >
+        >
+        <Grid item xs={12}>
+          <Typography variant="h3" gutterBottom sx={{ fontSize: '3rem' }}>
+              Neues Buch
+          </Typography>
+        </Grid>
         <Paper>
           <TableContainer>
             <Table>
@@ -389,7 +396,7 @@ const AddNewBookForm = ({ book, handleAddNewBook, feedbackMessage }) => {
           )}
         </Grid>
       </Grid>
-    </div>
+    </Box>
   );
 };
 

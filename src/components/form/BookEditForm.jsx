@@ -7,6 +7,8 @@ import {
   RadioGroup,
   Rating,
   TextField,
+  Box,
+  Typography,
 } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -172,8 +174,13 @@ const BookEditForm = ({ book, etag }) => {
   };
 
   return (
-    <div>
+    <Box p={2} bgcolor="background.paper" boxShadow={3} borderRadius={2}>
       <Grid container spacing={4}>
+      <Grid item xs={12}>
+          <Typography variant="h3" gutterBottom sx={{ fontSize: '3rem' }}>
+          Ändern
+          </Typography>
+        </Grid>
         <Grid item xs={12}>
           <TextField
             name="titel"
@@ -315,7 +322,7 @@ const BookEditForm = ({ book, etag }) => {
           </Button>
         </Grid>
       </Grid>
-    </div>
+    </Box>
   );
 };
 
