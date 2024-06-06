@@ -39,8 +39,7 @@ const BookEdit = () => {
   }
 
   return (
-    <div>
-      <h2>Ändern</h2>
+    <div style={{ marginTop: '10px' }}>
       <BookEditForm book={book} etag={etag} />
     </div>
   );

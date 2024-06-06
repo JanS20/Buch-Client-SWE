@@ -54,8 +54,7 @@ const AddNewBook = () => {
   };
 
   return (
-    <div>
-      <h2>Neues Buch</h2>
+    <div style={{ marginTop: '10px' }}>
       <AddNewBookForm
         handleAddNewBook={handleAddNewBook}
         book={book}

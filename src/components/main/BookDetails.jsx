@@ -67,7 +67,7 @@ const BookDetails = () => {
   }
 
   return (
-    <div>
+    <div style={{ marginTop: '10px' }}>
       <BookDetailsForm
         book={book}
         deleteBook={deleteBook}

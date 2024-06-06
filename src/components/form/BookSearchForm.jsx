@@ -9,7 +9,6 @@ import {
   TextField,
   Typography,
   IconButton,
-  Divider,
   Rating,
 } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
@@ -41,10 +40,9 @@ const BookSearchForm = ({
   handleReset,
 }) => {
   return (
-    <div>
+    <Box p={2} bgcolor="background.paper" boxShadow={3} borderRadius={2}>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-        <Divider></Divider>
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
@@ -231,7 +229,7 @@ const BookSearchForm = ({
           />
         </Box>
       ) : null}
-    </div>
+    </Box>
   );
 };
 
