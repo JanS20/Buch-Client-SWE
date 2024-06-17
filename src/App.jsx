@@ -5,6 +5,7 @@ import BookSearch from './components/main/BookSearch';
 import AddNewBook from './components/main/AddNewBook'; // Beachte den korrekten Pfad
 import BookDetails from './components/main/BookDetails'; // Stelle sicher, dass der Pfad korrekt ist
 import HomePage from './components/main/HomePage'; // Beachte den korrekten Pfad
+import LoginForm from './components/login';
 function App() {
   return (
     <>
@@ -15,6 +16,7 @@ function App() {
         <Route path="/edit/:id" element={<BookEdit />} />
         <Route path="/add" element={<AddNewBook />} />
         <Route path="/details/:id" element={<BookDetails />} />
+        <Route path="/login" element={<LoginForm />} />
       </Routes>
     </>
   );

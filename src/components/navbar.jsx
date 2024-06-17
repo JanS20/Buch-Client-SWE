@@ -60,7 +60,7 @@ const Navbar = (props) => {
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
-          <MenuItem onClick={() => setOpen(true)}>Login</MenuItem>
+          <MenuItem component={Link} to="/login" onClick={() => setOpen(true)}>Login</MenuItem>
         </Menu>
       </Toolbar>
     </AppBar>
