@@ -55,7 +55,7 @@ const BookDetailsForm = ({ book, deleteBook }) => {
     <Box p={2} bgcolor="background.paper" boxShadow={3} borderRadius={2}>
       <Grid container spacing={4}>
         <Grid item xs={12}>
-          <Typography variant="h3" gutterBottom sx={{ fontWeight: 'bold' }}>
+          <Typography variant="h3" gutterBottom sx={{ fontWeight: 'bold' }} textAlign="center">
             {titel}
           </Typography>
           <Divider />
@@ -118,7 +118,7 @@ const BookDetailsForm = ({ book, deleteBook }) => {
           </Box>
         </Grid>
         <Grid item xs={12}>
-          <Typography variant="body1" sx={{ fontSize: '1.5rem'}}>
+          <Typography variant="body1" sx={{ fontSize: '1.5rem'}} textAlign="center">
             <strong>Homepage: </strong>
             {exists(homepage) ? (
               <Link href={homepage} target="_blank" rel="noopener noreferrer">
