@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const loginUser = async ({ username, password }) => {
-    const url = '/auth/login';
+    const url = '/api/auth/login';
     const requestData = {
       username: encodeURIComponent(username),
       password: encodeURIComponent(password)
