@@ -48,7 +48,7 @@ function HomePage() {
       color="primary"
       style={{ marginBottom: '10px', width: '300px', height: '120px', fontSize: '1.3rem', fontWeight: 'bold'}}
     >
-      Book Details1
+      Book Details 1
     </Button>
   </Box>
 </Box>

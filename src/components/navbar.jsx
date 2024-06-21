@@ -80,7 +80,7 @@ const Navbar = () => {
                 Suchen
             </Button>
             <IconButton color="inherit" onClick={handleMenu}>
-              <AccountCircle />
+              <AccountCircle style={{ color: isLoggedIn() ? '#6fdf6f' : '#ff5d5d' }} />
             </IconButton>
           </Stack>
           <Menu
