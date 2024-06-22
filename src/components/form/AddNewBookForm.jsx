@@ -54,7 +54,8 @@ const AddNewBookForm = ({ book, handleAddNewBook, feedbackMessage }) => {
     errorMessage: '',
   });
   const [formValid, setFormValid] = useState(true);
-  const [addBook, setAddBook] = useState({ book });
+  const [addBook, setAddBook] = useState({ ...book });
+
   const bookDTO = {
     isbn: addBook.isbn,
     rating: parseInt(addBook.rating),
@@ -129,9 +130,7 @@ const AddNewBookForm = ({ book, handleAddNewBook, feedbackMessage }) => {
         isValid: isValidRabatt,
         errorMessage: isValidRabatt
           ? ''
-          : <>
-              Muss ein gültiger Rabatt sein <br/>(z.B. 0.10),
-            </>,
+          : 'Muss ein gültiger Rabatt sein (z.B. 0.10)',
       });
     }
 
@@ -139,14 +138,7 @@ const AddNewBookForm = ({ book, handleAddNewBook, feedbackMessage }) => {
       const isValidHomepage = validateHomepage(value);
       setHomepageValidation({
         isValid: isValidHomepage,
-        errorMessage: isValidHomepage ? (
-          ''
-        ) : (
-          <>
-            Muss eine gültige URL sein <br />
-             (https://beispiel.com)
-          </>
-        ),
+        errorMessage: isValidHomepage ? '' : 'Muss eine gültige URL sein (https://beispiel.com)',
       });
     }
   };
@@ -154,14 +146,14 @@ const AddNewBookForm = ({ book, handleAddNewBook, feedbackMessage }) => {
   useEffect(() => {
     setFormValid(
       isbnValidation.isValid &&
-        titleValidation &&
+        titleValidation.isValid &&
         preisValidation.isValid &&
         rabattValidation.isValid &&
         homepageValidation.isValid
     );
   }, [
     isbnValidation.isValid,
-    titleValidation,
+    titleValidation.isValid,
     preisValidation.isValid,
     rabattValidation.isValid,
     homepageValidation.isValid,
@@ -173,17 +165,32 @@ const AddNewBookForm = ({ book, handleAddNewBook, feedbackMessage }) => {
         container
         spacing={2}
         style={{ flexDirection: 'column', alignItems: 'center' }}
-        >
+      >
         <Grid item xs={12}>
           <Typography variant="h3" gutterBottom sx={{ fontSize: '3rem' }}>
-              Neues Buch
+            Neues Buch
           </Typography>
         </Grid>
         <Paper>
           <TableContainer>
             <Table>
               <TableBody>
-                <TableRow>
+                <TableRow>               
+                  <TableCell>ISBN:</TableCell>
+                  <TableCell>
+                    <Grid item xs={12}>
+                      <TextField
+                        required
+                        type="text"
+                        name="isbn"
+                        value={addBook.isbn || ''}
+                        onChange={handleInputChange}
+                        label="Required"
+                        error={!isbnValidation.isValid}
+                        helperText={isbnValidation.errorMessage}
+                      />
+                    </Grid>
+                  </TableCell>
                   <TableCell>Titel:</TableCell>
                   <TableCell>
                     <Grid item xs={12}>
@@ -266,20 +273,8 @@ const AddNewBookForm = ({ book, handleAddNewBook, feedbackMessage }) => {
                             })
                           }
                         >
-                          <MenuItem
-                            name="kindle"
-                            value="KINDLE"
-                            onChange={handleInputChange}
-                          >
-                            Kindle
-                          </MenuItem>
-                          <MenuItem
-                            name="druckausgabe"
-                            value="DRUCKAUSGABE"
-                            onChange={handleInputChange}
-                          >
-                            Druckausgabe
-                          </MenuItem>
+                          <MenuItem value="KINDLE">Kindle</MenuItem>
+                          <MenuItem value="DRUCKAUSGABE">Druckausgabe</MenuItem>
                         </Select>
                       </FormControl>
                     </Grid>
@@ -292,7 +287,7 @@ const AddNewBookForm = ({ book, handleAddNewBook, feedbackMessage }) => {
                       <FormControl>
                         <RadioGroup
                           name="lieferbar"
-                          value={addBook.lieferbar || true}
+                          value={addBook.lieferbar}
                           onChange={handleInputChange}
                         >
                           <FormControlLabel
@@ -345,26 +340,26 @@ const AddNewBookForm = ({ book, handleAddNewBook, feedbackMessage }) => {
                       <FormControlLabel
                         control={
                           <Checkbox
-                            checked={addBook.schlagwoerter}
-                            value={['TYPESCRIPT']}
-                            onChange={handleInputChange}
-                            name="typescript"
-                            color="primary"
-                          />
-                        }
-                        label="TypeScript"
-                      />
-                      <FormControlLabel
-                        control={
-                          <Checkbox
-                            checked={addBook.schlagwoerter}
-                            value={['JAVASCRIPT']}
+                            checked={addBook.javascript || false}
+                            value="JAVASCRIPT"
                             onChange={handleInputChange}
                             name="javascript"
                             color="primary"
                           />
                         }
                         label="JavaScript"
+                      />
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            checked={addBook.typescript || false}
+                            value="TYPESCRIPT"
+                            onChange={handleInputChange}
+                            name="typescript"
+                            color="primary"
+                          />
+                        }
+                        label="TypeScript"
                       />
                     </Grid>
                   </TableCell>

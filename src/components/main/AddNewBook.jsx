@@ -34,14 +34,13 @@ const AddNewBook = () => {
       if (response.status === 201) {
         console.log(
           'Buch wurde erfolgreich hinzugefügt. ID:',
-          response.data.id,
-          setFeedbackMessage('Das Buch wurde erfolgreich hinzugefügt.')
+          response.data.id
         );
+        setFeedbackMessage('Das Buch wurde erfolgreich hinzugefügt.');
         setBook(() => ({
           ...book,
           id: response.data.id,
         }));
-        setBook(book);
       } else {
         console.error('Error occurred during POST request:', response);
       }

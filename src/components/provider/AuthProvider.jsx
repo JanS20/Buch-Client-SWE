@@ -18,7 +18,6 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (username, password) => {
     try {
-      // destructuring
       const response = await loginUser({ username, password });
       const { data: { access_token, roles } } = response;
       setToken(access_token);
@@ -43,10 +42,8 @@ export const AuthProvider = ({ children }) => {
 
     try {
       const response = await axios.post(url, requestData);
-
       return response;
     } catch (error) {
-      //axios wirft standardmäßig Fehler wirft, wenn der Statuscode nicht im Bereich 200 liegt
       throw new Error('Login failed');
     }
   };
@@ -59,8 +56,8 @@ export const AuthProvider = ({ children }) => {
   };
 
   const isLoggedIn = () => {
-    return (Token !== '')
-  }
+    return Token !== '';
+  };
 
   return (
     <AuthContext.Provider value={{ Token, writeAccess, login, logout, isLoggedIn }}>
