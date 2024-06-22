@@ -19,14 +19,14 @@ import { AddCircleOutline, Search, AccountCircle } from '@mui/icons-material';
 const Navbar = () => {
 
   const { login, logout, writeAccess, isLoggedIn } = useAuth();
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [localUsername, setLocalUsername] = useState('');
+  const [localPassword, setLocalPassword] = useState('');
   const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
-      const successfulLogin = await login(username, password);
+      const successfulLogin = await login(localUsername, localPassword);
       if (successfulLogin) {
         navigate('/');
       } else {
@@ -39,7 +39,7 @@ const Navbar = () => {
 
   const handleLogout = () => {
     logout();
-    setPassword('');
+    setLocalPassword('');
   };
 
   const handleMenu = (event) => {
@@ -65,7 +65,7 @@ const Navbar = () => {
             <Button
               component={Link} to="/add" 
               color="inherit" 
-              disabled={writeAccess} 
+              disabled={!writeAccess} 
               sx={{ fontWeight: 'bold' }} 
               startIcon={<AddCircleOutline />}
             >
@@ -97,8 +97,8 @@ const Navbar = () => {
                       label="Username"
                       variant="outlined"
                       size="small"
-                      value={username}
-                      onChange={(e) => setUsername(e.target.value)}
+                      value={localUsername}
+                      onChange={(e) => setLocalUsername(e.target.value)}
                       fullWidth
                     />
                     <TextField
@@ -106,8 +106,8 @@ const Navbar = () => {
                       variant="outlined"
                       size="small"
                       type="password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
+                      value={localPassword}
+                      onChange={(e) => setLocalPassword(e.target.value)}
                       fullWidth
                     />
                     <Button
@@ -123,9 +123,9 @@ const Navbar = () => {
                 {isLoggedIn() && (
                   <>
                     <Typography textAlign="center" sx={{ fontSize: '1.3rem', fontWeight: 'bold', color: 'black' }}>
-                      {username}
+                      {localUsername}
                     </Typography>
-                    <Button
+                    <Button   
                       variant="contained"
                       color="primary"
                       onClick={handleLogout}
