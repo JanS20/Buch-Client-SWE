@@ -1,20 +1,20 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-
+import { useAuth } from '../provider/useAuth.js';
 import BookDetailsForm from '../form/BookDetailsForm.jsx';
 
 const BookDetails = () => {
   const [book, setBook] = useState(null);
   const { id = 'default' } = useParams();
   const [notFound, setNotFound] = useState(false);
+  const { Token, writeAccess } = useAuth();
 
   useEffect(() => {
     const fetchBook = async () => {
-      const url = '/api/rest';
-      const request = `?id=${id}`;
+      const url = `/api/rest/?id=${id}`;
       try {
-        const response = await axios.get(url + request);
+        const response = await axios.get(url);
         if (response.status === 200) {
           if (response.data) {
             setBook(response.data._embedded.buecher[0]);
@@ -38,25 +38,27 @@ const BookDetails = () => {
     fetchBook();
   }, [id]);
 
-  const deleteBook = (id) => {
+  const deleteBook = async (id) => {
+    if (!Token) {
+      console.error('BookDetails.deleteBook: Kein Token vorhanden');
+      return;
+    }
+    
     const headers = {
-      'Content-Type': 'application/hal',
+      Authorization: `Bearer ${Token}`
     };
-    const url = '/api/rest/';
-    const request = `${id}`;
-    axios
-      .delete(url + request, { headers })
-      .then((response) => {
+    const url = `/rest/${id}`;
+    try {
+      const response = await axios.delete(url, { headers });
         if (response.status !== 204) {
           throw new Error(
             `BookDetails.deleteBook: Kein 200 Status-Code, sondern:${response.status}`
           );
         }
         setBook(null);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error('BookDetails.deleteBook:', error.message);
-      });
+      }
   };
 
   if (!book) {
@@ -71,6 +73,7 @@ const BookDetails = () => {
       <BookDetailsForm
         book={book}
         deleteBook={deleteBook}
+        writeAccess={writeAccess}
       />
     </div>
   );
