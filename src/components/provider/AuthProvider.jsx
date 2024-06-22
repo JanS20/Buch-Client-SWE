@@ -7,26 +7,28 @@ export const AuthProvider = ({ children }) => {
   const [writeAccess, setWriteAccess] = useState(false);
 
   useEffect(() => {
-    const storedToken = localStorage.getItem('authToken');
-    const storedWriteAccess = localStorage.getItem('writeAccess') === 'true';
-
-    if (storedToken) {
-      setToken(storedToken);
-      setWriteAccess(storedWriteAccess);
+    if (Token) {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${Token}`;
+      console.log('Token set in axios headers:', Token);
+    } else {
+      delete axios.defaults.headers.common['Authorization'];
+      console.log('Token removed from axios headers');
     }
-  }, []);
+  }, [Token]);
 
   const login = async (username, password) => {
     try {
       // destructuring
-      const { data: { token, roles } } = await loginUser({ username, password });
-      setToken(token);
-      localStorage.setItem('authToken', token);
+      const response = await loginUser({ username, password });
+      const { data: { Token, roles } } = response;
+      setToken(response.data.access_token);
+      console.log('Token set in axios headers:  !', Token);
+      axios.defaults.headers.common ['Authorization'] =
+      `Bearer ${Token}`;
 
       const isAdmin = roles.includes('admin');
       const isKunde = roles.includes('kunde');
       setWriteAccess(isAdmin);
-      localStorage.setItem('writeAccess', isAdmin);
 
       return isAdmin || isKunde;
     } catch (error) {
@@ -43,9 +45,10 @@ export const AuthProvider = ({ children }) => {
 
     try {
       const response = await axios.post(url, requestData);
+
       return response;
     } catch (error) {
-      //axios wirft standardmäßig Fehler, wenn der Statuscode nicht im Bereich 200 liegt
+      //axios wirft standardmäßig Fehler wirft, wenn der Statuscode nicht im Bereich 200 liegt
       throw new Error('Login failed');
     }
   };
@@ -53,12 +56,12 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     setToken('');
     setWriteAccess(false);
-    localStorage.removeItem('authToken');
-    localStorage.removeItem('writeAccess');
+    delete axios.defaults.headers.common['Authorization'];
+    console.log('User logged out, token cleared');
   };
 
   const isLoggedIn = () => {
-    return (Token !== '');
+    return (Token !== '')
   }
 
   return (
