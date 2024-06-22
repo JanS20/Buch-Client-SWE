@@ -12,12 +12,13 @@ const BookDetails = () => {
 
   useEffect(() => {
     const fetchBook = async () => {
-      const url = `/api/rest/?id=${id}`;
+      const url = '/api/rest';
+      const request = `/${id}`;
       try {
-        const response = await axios.get(url);
+        const response = await axios.get(url + request);
         if (response.status === 200) {
           if (response.data) {
-            setBook(response.data._embedded.buecher[0]);
+            setBook(response.data);
             setNotFound(false);
           } else {
             console.error(
@@ -47,7 +48,7 @@ const BookDetails = () => {
     const headers = {
       Authorization: `Bearer ${Token}`
     };
-    const url = `/rest/${id}`;
+    const url = `/api/rest/${id}`;
     try {
       const response = await axios.delete(url, { headers });
         if (response.status !== 204) {
