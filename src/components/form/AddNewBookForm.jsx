@@ -175,7 +175,22 @@ const AddNewBookForm = ({ book, handleAddNewBook, feedbackMessage }) => {
           <TableContainer>
             <Table>
               <TableBody>
-                <TableRow>
+                <TableRow>               
+                  <TableCell>ISBN:</TableCell>
+                  <TableCell>
+                    <Grid item xs={12}>
+                      <TextField
+                        required
+                        type="text"
+                        name="isbn"
+                        value={addBook.isbn || ''}
+                        onChange={handleInputChange}
+                        label="Required"
+                        error={!isbnValidation.isValid}
+                        helperText={isbnValidation.errorMessage}
+                      />
+                    </Grid>
+                  </TableCell>
                   <TableCell>Titel:</TableCell>
                   <TableCell>
                     <Grid item xs={12}>
