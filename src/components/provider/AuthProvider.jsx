@@ -18,13 +18,10 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (username, password) => {
     try {
-      // destructuring
       const response = await loginUser({ username, password });
-      const { data: { Token, roles } } = response;
-      setToken(response.data.access_token);
-      console.log('Token set in axios headers:  !', Token);
-      axios.defaults.headers.common ['Authorization'] =
-      `Bearer ${Token}`;
+      const { data: { access_token, roles } } = response;
+      setToken(access_token);
+      axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
 
       const isAdmin = roles.includes('admin');
       const isKunde = roles.includes('kunde');
@@ -45,10 +42,8 @@ export const AuthProvider = ({ children }) => {
 
     try {
       const response = await axios.post(url, requestData);
-
       return response;
     } catch (error) {
-      //axios wirft standardmäßig Fehler wirft, wenn der Statuscode nicht im Bereich 200 liegt
       throw new Error('Login failed');
     }
   };
@@ -61,8 +56,8 @@ export const AuthProvider = ({ children }) => {
   };
 
   const isLoggedIn = () => {
-    return (Token !== '')
-  }
+    return Token !== '';
+  };
 
   return (
     <AuthContext.Provider value={{ Token, writeAccess, login, logout, isLoggedIn }}>
