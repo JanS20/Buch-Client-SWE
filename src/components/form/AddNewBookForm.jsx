@@ -177,7 +177,7 @@ const AddNewBookForm = ({ book, handleAddNewBook, feedbackMessage }) => {
               <TableBody>
                 <TableRow>               
                   <TableCell>ISBN:</TableCell>
-                  <TableCell>
+                   <TableCell>
                     <Grid item xs={12}>
                       <TextField
                         required
@@ -189,8 +189,10 @@ const AddNewBookForm = ({ book, handleAddNewBook, feedbackMessage }) => {
                         error={!isbnValidation.isValid}
                         helperText={isbnValidation.errorMessage}
                       />
-                    </Grid>
+                    </Grid> 
                   </TableCell>
+                 </TableRow>  
+                <TableRow>  
                   <TableCell>Titel:</TableCell>
                   <TableCell>
                     <Grid item xs={12}>
