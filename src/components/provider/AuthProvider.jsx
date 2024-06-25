@@ -4,7 +4,6 @@ import axios from 'axios';
 
 export const AuthProvider = ({ children }) => {
   const [Token, setToken] = useState('');
-  const [writeAccess, setWriteAccess] = useState(false);
 
   useEffect(() => {
     if (Token) {
@@ -19,15 +18,13 @@ export const AuthProvider = ({ children }) => {
   const login = async (username, password) => {
     try {
       const response = await loginUser({ username, password });
-      const { data: { access_token, roles } } = response;
+      const { data: { access_token } } = response;
       setToken(access_token);
       axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
 
-      const isAdmin = roles.includes('admin');
-      const isKunde = roles.includes('kunde');
-      setWriteAccess(isAdmin);
 
-      return isAdmin || isKunde;
+
+      return true
     } catch (error) {
       return false;
     }
@@ -50,7 +47,6 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     setToken('');
-    setWriteAccess(false);
     delete axios.defaults.headers.common['Authorization'];
     console.log('User logged out, token cleared');
   };
@@ -60,7 +56,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ Token, writeAccess, login, logout, isLoggedIn }}>
+    <AuthContext.Provider value={{ Token, login, logout, isLoggedIn }}>
       {children}
     </AuthContext.Provider>
   );

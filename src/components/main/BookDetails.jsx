@@ -8,7 +8,7 @@ const BookDetails = () => {
   const [book, setBook] = useState(null);
   const { id = 'default' } = useParams();
   const [notFound, setNotFound] = useState(false);
-  const { Token, writeAccess } = useAuth();
+  const { Token } = useAuth();
 
   useEffect(() => {
     const fetchBook = async () => {
@@ -74,7 +74,6 @@ const BookDetails = () => {
       <BookDetailsForm
         book={book}
         deleteBook={deleteBook}
-        writeAccess={writeAccess}
       />
     </div>
   );

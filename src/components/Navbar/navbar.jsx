@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth } from './provider/useAuth.js';
+import { useAuth } from '../provider/useAuth.js';
 import { useNavigate } from 'react-router-dom';
 import {
   AppBar,
@@ -18,7 +18,7 @@ import { AddCircleOutline, Search, AccountCircle } from '@mui/icons-material';
 
 const Navbar = () => {
 
-  const { login, logout, writeAccess, isLoggedIn } = useAuth();
+  const { login, logout, isLoggedIn } = useAuth();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [anchorEl, setAnchorEl] = useState(null);
@@ -64,8 +64,7 @@ const Navbar = () => {
           <Stack direction="row" spacing={2}>
             <Button
               component={Link} to="/add" 
-              color="inherit" 
-              disabled={writeAccess} 
+              color="inherit"  
               sx={{ fontWeight: 'bold' }} 
               startIcon={<AddCircleOutline />}
             >

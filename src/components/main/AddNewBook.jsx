@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import axios from 'axios';
-
+import { AuthContext } from '../provider/AuthProvider.jsx';
 import AddNewBookForm from '../form/AddNewBookForm.jsx';
 
 const AddNewBook = () => {
-  const url = '/api/rest';
+  const { Token } = useContext(AuthContext);
+  const url = '/api/rest/';
   const [feedbackMessage, setFeedbackMessage] = useState('');
   const [book, setBook] = useState({
     isbn: '',
@@ -21,14 +22,13 @@ const AddNewBook = () => {
 
   const handleAddNewBook = async (bookDTO) => {
     console.log('handleAddNewBook called', bookDTO);
-
-    const headers = {
-      'Content-Type': 'application/json',
-    };
+    console.log('Token: ', Token);
 
     try {
       const response = await axios.post(url, bookDTO, {
-        headers: headers,
+        headers: {
+          Authorization: `Bearer ${Token}`,
+        }
       });
 
       if (response.status === 201) {
@@ -38,7 +38,7 @@ const AddNewBook = () => {
         );
         setFeedbackMessage('Das Buch wurde erfolgreich hinzugefügt.');
         setBook(() => ({
-          ...book,
+          book,
           id: response.data.id,
         }));
       } else {
