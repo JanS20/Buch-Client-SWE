@@ -184,6 +184,7 @@ const AddNewBookForm = ({ book, handleAddNewBook, feedbackMessage }) => {
                         onChange={handleInputChange}
                         error={!isbnValidation.isValid}
                         helperText={isbnValidation.errorMessage}
+                        fullWidth
                       />
                     </Grid>
                   </TableCell>
@@ -200,6 +201,7 @@ const AddNewBookForm = ({ book, handleAddNewBook, feedbackMessage }) => {
                         onChange={handleInputChange}
                         error={!titleValidation.isValid}
                         helperText={titleValidation.errorMessage}
+                        fullWidth
                       />
                     </Grid>
                   </TableCell>
@@ -216,6 +218,7 @@ const AddNewBookForm = ({ book, handleAddNewBook, feedbackMessage }) => {
                         onChange={handleInputChange}
                         error={!preisValidation.isValid}
                         helperText={preisValidation.errorMessage}
+                        fullWidth
                       />
                     </Grid>
                   </TableCell>
@@ -231,6 +234,7 @@ const AddNewBookForm = ({ book, handleAddNewBook, feedbackMessage }) => {
                         onChange={handleInputChange}
                         error={!rabattValidation.isValid}
                         helperText={rabattValidation.errorMessage}
+                        fullWidth
                       />
                     </Grid>
                   </TableCell>
@@ -249,6 +253,7 @@ const AddNewBookForm = ({ book, handleAddNewBook, feedbackMessage }) => {
                           handleRatingChange(newValue)
                         }
                         icon={<StarIcon />}
+                        
                       />
                     </Grid>
                   </TableCell>
@@ -268,6 +273,7 @@ const AddNewBookForm = ({ book, handleAddNewBook, feedbackMessage }) => {
                               art: e.target.value,
                             })
                           }
+                          
                         >
                           <MenuItem value="KINDLE">Kindle</MenuItem>
                           <MenuItem value="DRUCKAUSGABE">Druckausgabe</MenuItem>
@@ -325,6 +331,7 @@ const AddNewBookForm = ({ book, handleAddNewBook, feedbackMessage }) => {
                         onChange={handleInputChange}
                         error={!homepageValidation.isValid}
                         helperText={homepageValidation.errorMessage}
+                        fullWidth
                       />
                     </Grid>
                   </TableCell>
