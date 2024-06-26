@@ -93,12 +93,12 @@ const AddNewBookForm = ({ book, handleAddNewBook, feedbackMessage }) => {
   };
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
 
-    setAddBook({
-      ...addBook,
-      [name]: value,
-    });
+    setAddBook((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
 
     if (name === "isbn") {
       const isValidISBN = validateISBN(value);
@@ -168,7 +168,6 @@ const AddNewBookForm = ({ book, handleAddNewBook, feedbackMessage }) => {
         spacing={2}
         style={{ flexDirection: "column", alignItems: "center" }}
       >
-
         <Paper>
           <TableContainer>
             <Table>
