@@ -4,8 +4,6 @@ import {
   Checkbox,
   FormControlLabel,
   Grid,
-  Radio,
-  RadioGroup,
   TextField,
   Typography,
   IconButton,
@@ -28,8 +26,6 @@ const BookSearchForm = ({
   setIsJavaScript,
   isTypeScript,
   setIsTypeScript,
-  selectedBookFormat,
-  setselectedBookFormat,
   handleSearch,
   searchError,
   showTable,
@@ -99,26 +95,7 @@ const BookSearchForm = ({
             label="JavaScript"
           />
         </Grid>
-        <Grid item xs={12}>
-          <RadioGroup
-            aria-label="Radio options"
-            name="radio-options"
-            value={selectedBookFormat}
-            onChange={(e) => setselectedBookFormat(e.target.value)}
-            row
-          >
-            <FormControlLabel
-              value="DRUCKAUSGABE"
-              control={<Radio />}
-              label="Druckausgabe"
-            />
-            <FormControlLabel
-              value="KINDLE"
-              control={<Radio />}
-              label="Kindle"
-            />
-          </RadioGroup>
-        </Grid>
+       
         <Grid
           item
           xs={12}

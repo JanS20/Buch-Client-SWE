@@ -168,11 +168,7 @@ const AddNewBookForm = ({ book, handleAddNewBook, feedbackMessage }) => {
         spacing={2}
         style={{ flexDirection: "column", alignItems: "center" }}
       >
-        <Grid item xs={12}>
-          <Typography variant="h3" gutterBottom sx={{ fontSize: "3rem" }}>
-            Neues Buch
-          </Typography>
-        </Grid>
+
         <Paper>
           <TableContainer>
             <Table>

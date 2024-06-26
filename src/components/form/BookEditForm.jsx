@@ -177,11 +177,6 @@ const BookEditForm = ({ book, etag }) => {
   return (
     <Box p={2} bgcolor="background.paper" boxShadow={3} borderRadius={2}>
       <Grid container spacing={4}>
-      <Grid item xs={12}>
-          <Typography variant="h3" gutterBottom sx={{ fontSize: '3rem' }}>
-          Ändern
-          </Typography>
-        </Grid>
         <Grid item xs={12}>
         <Typography variant="h3" gutterBottom sx={{ fontSize: '2rem' }}>
           {titel}
@@ -316,7 +311,7 @@ const BookEditForm = ({ book, etag }) => {
             onClick={handleBtenClick}
             disabled={!formValid}
           >
-            Bearbeiten
+            Speichern
           </Button>
         </Grid>
       </Grid>

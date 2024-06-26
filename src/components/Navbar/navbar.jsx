@@ -12,17 +12,20 @@ import {
   MenuList,
   Box,
   Stack,
-  TextField
+  TextField,
+  useMediaQuery
 } from '@mui/material';
-import { AddCircleOutline, Search, AccountCircle } from '@mui/icons-material';
+import { AddCircleOutline, Search, AccountCircle, Home } from '@mui/icons-material';
+import { useTheme } from '@mui/material/styles';
 
 const Navbar = () => {
-
   const { login, logout, isLoggedIn } = useAuth();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const handleLogin = async () => {
     try {
@@ -50,36 +53,46 @@ const Navbar = () => {
     setAnchorEl(null);
   };
 
+  const handleUsernameChange = (e) => {
+    setUsername(e.target.value);
+  };
+
   return (
     <>
-      <AppBar position="sticky" sx={{ boxShadow: 10, borderRadius: '10px' }}>
+      <AppBar position="sticky" sx={{ boxShadow: 10 }}>
         <Toolbar>
-          <Button component={Link} to="/" color="inherit">
-            <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
-              <span style={{ color: 'darkorange' }}>Buch</span>
-              <span style={{ color: 'white' }}>Web</span>
-            </Typography>
-          </Button>
+          {isMobile ? (
+            <IconButton component={Link} to="/" color="inherit">
+              <Home />
+            </IconButton>
+          ) : (
+            <Button component={Link} to="/" color="inherit">
+              <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
+                <span style={{ color: theme.palette.custom3.main }}>Buch</span>
+                <span style={{ color: theme.palette.custom4.main }}>Web</span>
+              </Typography>
+            </Button>
+          )}
           <Box sx={{ flexGrow: 1 }} />
           <Stack direction="row" spacing={2}>
             <Button
-              component={Link} to="/add" 
-              color="inherit"  
-              sx={{ fontWeight: 'bold' }} 
+              component={Link} to="/add"
+              color="custom1"
+              sx={{ fontWeight: 'bold', display: 'inline-flex' }}
               startIcon={<AddCircleOutline />}
             >
-              Erstellen 
+              Erstellen
             </Button>
-            <Button 
-              component={Link} to="/search" 
-              color="inherit" 
-              sx={{ fontWeight: 'bold' }} 
+            <Button
+              component={Link} to="/search"
+              color="custom1"
+              sx={{ fontWeight: 'bold', display: 'inline-flex' }}
               startIcon={<Search />}
             >
-                Suchen
+              Suchen
             </Button>
             <IconButton color="inherit" onClick={handleMenu}>
-              <AccountCircle style={{ color: isLoggedIn() ? '#6fdf6f' : '#ff5d5d' }} />
+              <AccountCircle style={{ color: isLoggedIn() ? theme.palette.secondary.main : 'red' }} />
             </IconButton>
           </Stack>
           <Menu
@@ -97,7 +110,7 @@ const Navbar = () => {
                       variant="outlined"
                       size="small"
                       value={username}
-                      onChange={(e) => setUsername(e.target.value)}
+                      onChange={handleUsernameChange}
                       fullWidth
                     />
                     <TextField
