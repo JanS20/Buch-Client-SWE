@@ -18,10 +18,10 @@ import {
   Rating,
   Box,
   Typography,
-} from '@mui/material';
-import StarIcon from '@mui/icons-material/Star';
-import PropTypes from 'prop-types';
-import { useState, useEffect } from 'react';
+} from "@mui/material";
+import StarIcon from "@mui/icons-material/Star";
+import PropTypes from "prop-types";
+import { useState, useEffect } from "react";
 
 import {
   validateISBN,
@@ -29,29 +29,29 @@ import {
   validateRabatt,
   validateHomepage,
   validateTitle,
-} from './inputValidator';
+} from "./inputValidator";
 
 const AddNewBookForm = ({ book, handleAddNewBook, feedbackMessage }) => {
   const [isbnValidation, setIsbnValidation] = useState({
     isValid: true,
-    errorMessage: '',
+    errorMessage: "",
   });
 
   const [titleValidation, setTitleValidation] = useState({
     isValid: true,
-    errorMessage: '',
+    errorMessage: "",
   });
   const [preisValidation, setPreisValidation] = useState({
     isValid: true,
-    errorMessage: '',
+    errorMessage: "",
   });
   const [rabattValidation, setRabattValidation] = useState({
     isValid: true,
-    errorMessage: '',
+    errorMessage: "",
   });
   const [homepageValidation, setHomepageValidation] = useState({
     isValid: true,
-    errorMessage: '',
+    errorMessage: "",
   });
   const [formValid, setFormValid] = useState(true);
   const [addBook, setAddBook] = useState({ ...book });
@@ -62,11 +62,11 @@ const AddNewBookForm = ({ book, handleAddNewBook, feedbackMessage }) => {
     art: addBook.art,
     preis: parseFloat(addBook.preis),
     rabatt: parseFloat(addBook.rabatt),
-    lieferbar: addBook.lieferbar === 'true' ? true : false,
+    lieferbar: addBook.lieferbar === "true" ? true : false,
     datum: addBook.datum,
     homepage: addBook.homepage,
-    schlagwoerter: (addBook.javascript ? ['JAVASCRIPT'] : []).concat(
-      addBook.typescript ? ['TYPESCRIPT'] : []
+    schlagwoerter: (addBook.javascript ? ["JAVASCRIPT"] : []).concat(
+      addBook.typescript ? ["TYPESCRIPT"] : []
     ),
     titel: {
       titel: addBook.titel,
@@ -77,7 +77,7 @@ const AddNewBookForm = ({ book, handleAddNewBook, feedbackMessage }) => {
     const { name, value } = e.target;
 
     const transformedValue =
-      name === 'datum' ? new Date(value).toISOString().split('T')[0] : value;
+      name === "datum" ? new Date(value).toISOString().split("T")[0] : value;
 
     setAddBook(() => ({
       ...addBook,
@@ -100,45 +100,47 @@ const AddNewBookForm = ({ book, handleAddNewBook, feedbackMessage }) => {
       [name]: value,
     });
 
-    if (name === 'isbn') {
+    if (name === "isbn") {
       const isValidISBN = validateISBN(value);
       setIsbnValidation({
         isValid: isValidISBN,
-        errorMessage: isValidISBN ? '' : 'Muss eine gültige ISBN sein',
+        errorMessage: isValidISBN ? "" : "Muss eine gültige ISBN sein",
       });
     }
 
-    if (name === 'titel') {
+    if (name === "titel") {
       const isValidTitle = validateTitle(value);
       setTitleValidation({
         isValid: isValidTitle,
-        errorMessage: isValidTitle ? '' : 'Der Titel darf nicht leer sein',
+        errorMessage: isValidTitle ? "" : "Der Titel darf nicht leer sein",
       });
     }
 
-    if (name === 'preis') {
+    if (name === "preis") {
       const isValidPreis = validatePreis(value);
       setPreisValidation({
         isValid: isValidPreis,
-        errorMessage: isValidPreis ? '' : 'Ungültiges Betragsformat',
+        errorMessage: isValidPreis ? "" : "Ungültiges Betragsformat",
       });
     }
 
-    if (name === 'rabatt') {
+    if (name === "rabatt") {
       const isValidRabatt = validateRabatt(value);
       setRabattValidation({
         isValid: isValidRabatt,
         errorMessage: isValidRabatt
-          ? ''
-          : 'Muss ein gültiger Rabatt sein (z.B. 0.10)',
+          ? ""
+          : "Muss ein gültiger Rabatt sein (z.B. 0.10)",
       });
     }
 
-    if (name === 'homepage') {
+    if (name === "homepage") {
       const isValidHomepage = validateHomepage(value);
       setHomepageValidation({
         isValid: isValidHomepage,
-        errorMessage: isValidHomepage ? '' : 'Muss eine gültige URL sein (https://beispiel.com)',
+        errorMessage: isValidHomepage
+          ? ""
+          : "Muss eine gültige URL sein (https://beispiel.com)",
       });
     }
   };
@@ -164,10 +166,10 @@ const AddNewBookForm = ({ book, handleAddNewBook, feedbackMessage }) => {
       <Grid
         container
         spacing={2}
-        style={{ flexDirection: 'column', alignItems: 'center' }}
+        style={{ flexDirection: "column", alignItems: "center" }}
       >
         <Grid item xs={12}>
-          <Typography variant="h3" gutterBottom sx={{ fontSize: '3rem' }}>
+          <Typography variant="h3" gutterBottom sx={{ fontSize: "3rem" }}>
             Neues Buch
           </Typography>
         </Grid>
@@ -175,24 +177,23 @@ const AddNewBookForm = ({ book, handleAddNewBook, feedbackMessage }) => {
           <TableContainer>
             <Table>
               <TableBody>
-                <TableRow>               
+                <TableRow>
                   <TableCell>ISBN:</TableCell>
-                   <TableCell>
+                  <TableCell>
                     <Grid item xs={12}>
                       <TextField
                         required
                         type="text"
                         name="isbn"
-                        value={addBook.isbn || ''}
+                        value={addBook.isbn || ""}
                         onChange={handleInputChange}
-                        label="Required"
                         error={!isbnValidation.isValid}
                         helperText={isbnValidation.errorMessage}
                       />
-                    </Grid> 
+                    </Grid>
                   </TableCell>
-                 </TableRow>  
-                <TableRow>  
+                </TableRow>
+                <TableRow>
                   <TableCell>Titel:</TableCell>
                   <TableCell>
                     <Grid item xs={12}>
@@ -200,9 +201,8 @@ const AddNewBookForm = ({ book, handleAddNewBook, feedbackMessage }) => {
                         required
                         type="text"
                         name="titel"
-                        value={addBook.titel || ''}
+                        value={addBook.titel || ""}
                         onChange={handleInputChange}
-                        label="Required"
                         error={!titleValidation.isValid}
                         helperText={titleValidation.errorMessage}
                       />
@@ -217,9 +217,8 @@ const AddNewBookForm = ({ book, handleAddNewBook, feedbackMessage }) => {
                         required
                         type="text"
                         name="preis"
-                        value={addBook.preis || ''}
+                        value={addBook.preis || ""}
                         onChange={handleInputChange}
-                        label="Required"
                         error={!preisValidation.isValid}
                         helperText={preisValidation.errorMessage}
                       />
@@ -233,7 +232,7 @@ const AddNewBookForm = ({ book, handleAddNewBook, feedbackMessage }) => {
                       <TextField
                         type="text"
                         name="rabatt"
-                        value={addBook.rabatt || ''}
+                        value={addBook.rabatt || ""}
                         onChange={handleInputChange}
                         error={!rabattValidation.isValid}
                         helperText={rabattValidation.errorMessage}
@@ -267,7 +266,7 @@ const AddNewBookForm = ({ book, handleAddNewBook, feedbackMessage }) => {
                         <Select
                           labelId="art-label"
                           name="art"
-                          value={addBook.art || ''}
+                          value={addBook.art || ""}
                           onChange={(e) =>
                             setAddBook({
                               ...addBook,
@@ -314,7 +313,7 @@ const AddNewBookForm = ({ book, handleAddNewBook, feedbackMessage }) => {
                       <TextField
                         type="date"
                         name="datum"
-                        value={addBook.datum || ''}
+                        value={addBook.datum || ""}
                         onChange={handleDateChange}
                       />
                     </Grid>
@@ -327,7 +326,7 @@ const AddNewBookForm = ({ book, handleAddNewBook, feedbackMessage }) => {
                       <TextField
                         type="text"
                         name="homepage"
-                        value={addBook.homepage || ''}
+                        value={addBook.homepage || ""}
                         onChange={handleInputChange}
                         error={!homepageValidation.isValid}
                         helperText={homepageValidation.errorMessage}
@@ -371,26 +370,29 @@ const AddNewBookForm = ({ book, handleAddNewBook, feedbackMessage }) => {
           </TableContainer>
         </Paper>
         <Grid item xs={12}>
-          <Button
-            variant="contained"
-            style={{ alignItems: 'center', width: 'auto' }}
-            onClick={() => handleAddNewBook(bookDTO)}
-            disabled={!formValid}
-          >
-            Buch anlegen
-          </Button>
-          {feedbackMessage && (
-            <div
-              style={{
-                marginTop: '10px',
-                color: feedbackMessage.includes('erfolgreich')
-                  ? 'green'
-                  : 'red',
-              }}
+          <Box display="flex" flexDirection="column" alignItems="center">
+            <Button
+              variant="contained"
+              style={{ width: "200px" }}
+              onClick={() => handleAddNewBook(bookDTO)}
+              disabled={!formValid}
             >
-              {feedbackMessage}
-            </div>
-          )}
+              Buch anlegen
+            </Button>
+            {feedbackMessage && (
+              <Typography
+                variant="body2"
+                style={{
+                  marginTop: "10px",
+                  color: feedbackMessage.includes("erfolgreich")
+                    ? "green"
+                    : "red",
+                }}
+              >
+                {feedbackMessage}
+              </Typography>
+            )}
+          </Box>
         </Grid>
       </Grid>
     </Box>
