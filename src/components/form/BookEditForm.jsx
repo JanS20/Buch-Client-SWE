@@ -26,6 +26,7 @@ import {
 const BookEditForm = ({ book, etag }) => {
   const [editedBook, setEditedBook] = useState(book);
   const [formValid, setFormValid] = useState(true);
+  const { titel: { titel } } = book;
   const [isbnValidation, setIsbnValidation] = useState({
     isValid: true,
     errorMessage: '',
@@ -182,14 +183,9 @@ const BookEditForm = ({ book, etag }) => {
           </Typography>
         </Grid>
         <Grid item xs={12}>
-          <TextField
-            name="titel"
-            label="Buchtitel"
-            variant="outlined"
-            value={editedBook.titel}
-            disabled
-            fullWidth
-          />
+        <Typography variant="h3" gutterBottom sx={{ fontSize: '2rem' }}>
+          {titel}
+          </Typography>
         </Grid>
         <Grid item xs={12}>
           <TextField
@@ -291,7 +287,8 @@ const BookEditForm = ({ book, etag }) => {
           <FormControlLabel
             control={
               <Checkbox
-                name="typescript"
+                name="schlagwoerter"
+                value="TYPESCRIPT"
                 checked={editedBook.schlagwoerter.includes('TYPESCRIPT')}
                 onChange={handleInputChange}
                 color="primary"
@@ -302,7 +299,8 @@ const BookEditForm = ({ book, etag }) => {
           <FormControlLabel
             control={
               <Checkbox
-                name="javascript"
+                name="schlagwoerter"
+                value="JAVASCRIPT"
                 checked={editedBook.schlagwoerter.includes('JAVASCRIPT')}
                 onChange={handleInputChange}
                 color="primary"
@@ -328,7 +326,6 @@ const BookEditForm = ({ book, etag }) => {
 
 BookEditForm.propTypes = {
   book: PropTypes.shape({
-    titel: PropTypes.string,
     isbn: PropTypes.string,
     rating: PropTypes.number,
     art: PropTypes.string,
@@ -338,6 +335,10 @@ BookEditForm.propTypes = {
     datum: PropTypes.string,
     homepage: PropTypes.string,
     schlagwoerter: PropTypes.arrayOf(PropTypes.string),
+    titel: PropTypes.shape({
+      titel: PropTypes.string.isRequired,
+      untertitel: PropTypes.string.isRequired,
+    }).isRequired,
   }).isRequired,
   etag: PropTypes.string.isRequired,
 };
